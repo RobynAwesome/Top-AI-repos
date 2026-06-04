@@ -4,6 +4,7 @@ import os
 import time
 import json
 from datetime import datetime, timedelta
+from pathlib import Path
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -161,16 +162,16 @@ def sort_markdown_table(markdown_content):
 
     return new_markdown_content
 
-# Main execution
-file_path = r"C:\Users\ishan\Documents\Projects\Top-AI-repos\README.md"
+if __name__ == "__main__":
+    file_path = Path(__file__).resolve().parent / "README.md"
 
-with open(file_path, 'r', encoding='utf-8') as f:
-    content = f.read()
+    with open(file_path, "r", encoding="utf-8") as f:
+        content = f.read()
 
-updated_content = sort_markdown_table(content)
+    updated_content = sort_markdown_table(content)
 
-with open(file_path, 'w', encoding='utf-8') as f:
-    f.write(updated_content)
+    with open(file_path, "w", encoding="utf-8") as f:
+        f.write(updated_content)
 
-save_cache(star_cache)
-print("Table sorting complete. Check README.md")
+    save_cache(star_cache)
+    print(f"Table sorting complete. Updated {file_path}")
